@@ -85,11 +85,13 @@
         <table>
             <tbody>
                 <tr>
-                    <td colspan="3">Surname : <input id="surname" type="text" value="{{admission1.surname}}" name="surname"></td>
+                   
                     
-                    <td colspan="3">First Name : <input id="name" type="text" value="{{admission1.name}}" name="name"></td>
+                    <td colspan="3">Surname : <input id="surname" type="text" value="{{user.last_name}}" name="lastName"></td>
                     
-                    <td colspan="3">Middle Name : <input id="midname" type="text" value="{{admission1.midname}}" name="midname"></td>
+                    <td colspan="3">First Name : <input id="name" type="text" value="{{user.first_name}}" name="firstName"></td>
+                    
+                    <td colspan="3">Middle Name : <input id="midname" type="text" value="{{admission1.midname}}" name="midName"></td>
 
                     
                 </tr>
@@ -137,13 +139,12 @@
         <table class="adm">
             <tr>
                 
-                
                 <td>Year of Admission</td>
                 <td><input type="text" value="{{admission1.year}}" name="year" onkeypress='validate(event)'></td>
                 <td>Category of Admission</td>
                 <td><input type="text" value="{{admission1.category}}" name="category" ></td>
-                <td>HSC (%)</td>
-                <td><input type="text" value="{{admission1.hsc}}" name="hsc" onkeypress='validate(event)'></td>
+                <td><label>HSC (%)</label></td>
+                <td>{{form.hsc_score}}</td>
             </tr>
 
             <tr>
@@ -161,10 +162,10 @@
 
     <div class="container" id="bottombtns">
        <!--  <a href="personalinfo.jsp"> -->
-    <a href="{%url 'personalinfo'%}">
+    <a href="/">
             <input class="btn btn-primary submit-btn" id="next"type="submit" value="Next" style="float: right;"  min="0" max="500000000000">  
         </a>
-        <a href="{%url 'admission'%}">
+        <a href="/">
             <input class="btn btn-primary submit-btn" type="submit" value="Save" style="float:right; " id="save" >  
         </a> 
     </div>

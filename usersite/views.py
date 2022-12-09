@@ -2,110 +2,58 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import logout
-#from .models import Admission
-#from usersite.models import admission
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.shortcuts import redirect
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
-
-from usersite.forms import admissionForm,personalinfoForm,academicForm
-from usersite.models import admission as admission2
-from usersite.models import personalinfo as personalinfo2
-from usersite.models import academic as academic2
 from django.contrib.auth.models import User
-
-#from usersite.models import admission1
-#from django.contrib.auth.forms import Authentication
-
-# Create your views here.
-
-@login_required(login_url='logreg/login')
+from .forms import admissionForm
 
 
 
-# """ def admission(request):
-#   if not request.user.is_authenticated:
-#     return redirect('unauthorised')
-#   else:
-#      if request.method == 'POST':
-#       year = request.POST.get('year')
-#       category = request.POST.get('category')
-#       hsc = request.POST.get('hsc')
-#       cet = request.POST.get('cet')
-#       jee = request.POST.get('jee')
-#       diploma = request.POST.get('diploma')
-#       print(year,category,hsc,cet,jee)
-#       da = admission(year=year,category=category,hsc=hsc,cet=cet,jee=jee,diploma=diploma)
-#       da.save()
-
-#   return render(request,'admission.html')  """
-
-# parenthesis
-
-# def admission1(request):
-  # n=''
-  # if request.method == 'POST':
-  #     year = request.POST.get('year')
-  #     category = request.POST.get('category')
-  #     hsc = request.POST.get('hsc')
-  #     cet = request.POST.get('cet')
-  #     jee = request.POST.get('jee')
-  #     diploma = request.POST.get('diploma')
-  #     print(year,category,hsc,cet,jee)
-  #     da = admission1(year=year,category=category,hsc=hsc,cet=cet,jee=jee,diploma=diploma)
-  #     da.save()
-  #     n='Data Inserted'
 
 
-  # return render(request,'admission.html',{'n':n})
+def index(request):
+  return redirect('admission.html')
+
+    
 
 
 
-# square brackets
+def home_view(request):
+  context={}
+  context['form']=admissionForm()
+  return render(request,"admission.html",context)
 
-#  if request.method == 'POST':
-#       year = request.POST['year']
-#       category = request.POST['category']
-#       hsc = request.POST['hsc']
-#       cet = request.POST['cet']
-#       jee = request.POST['jee']
-#       diploma = request.POST['diploma']
 
-# Vishal
 
-#if request.user.is_authenticated:
-    #    user = request.user
-   #     form = OapForm()
-  #      oaps = Oap.objects.filter(user = user)
- #       return render(request , 'oap.html' , context={'form' : form , 'oaps' : oaps})
-
-@login_required
-def admission(request):
-
-  if  request.user.is_authenticated:
-
-      user = request.user
-      print(user)
-      form = admissionForm()
-      #admission1 = admission2.objects.get(user=2)
-      try:
-        admission1 = admission2.objects.filter(user=user).latest('pk')
-      except:
-        admission1 = admission2.objects.filter(user=user)
-      #admission1 = admission2.objects.all()
-
-      return render(request,'admission.html', context={'form': form , 'admission1': admission1})
-      #return render(request,'admission.html', context={'form': form)
-
-  else:
-
+def get_details(request):
+  if not request.user.is_authenticated:
     return redirect('unauthorised')
+  else:
+     if request.method == 'POST':
+      hsc = request.POST['hsc_marks']
+      # cet = request.POST.get('cet')
+      # jee = request.POST.get('jee')
+      # diploma = request.POST.get('diploma')
+      # print(year,category,hsc,cet,jee)
+      # da = admission(year=year,category=category,hsc=hsc,cet=cet,jee=jee,diploma=diploma)
+      # da.save()
 
-@login_required
+     return render(request,'admission.html')
+
+
+  
+
+
+
+
+
+
+# @login_required
 def submit_admission(request):
-
+  
     if request.user.is_authenticated:
 
       user = request.user

@@ -25,7 +25,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
      path('',include('logreg.urls')),
-     path('usersite/',include('usersite.urls')),
+    #  path('usersite/',include('usersite.urls')),
      path('adminsite',include('adminsite.urls')),
      path('admin', admin.site.urls),
      #path('submit_admission/', submit_admission, name='submit_admission'),
