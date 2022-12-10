@@ -1,10 +1,16 @@
-from django import forms
+# from django import forms
+# from django.forms import ModelForm
+# from . models import admission_details
+# from django.contrib.auth.models import User
 
-class admissionForm(forms.Form):
-    year=forms.IntegerField()
-    category=forms.CharField(max_length=50)
-    hsc_score=forms.DecimalField(max_digits=4)
-    cet_score=forms.DecimalField(max_digits=4)
-    jee_score=forms.DecimalField(max_digits=4)
-    diploma_score=forms.DecimalField(max_digits=4)
+# class admissionForm(ModelForm):
+#      class Meta:
+#         model = admission_details
+#         fields = ['year_admission','category_admission','hsc_marks','cet_marks','jee_marks','diploma_marks','user']
+
+
+# # form=admissionForm()        
+
+
+
 

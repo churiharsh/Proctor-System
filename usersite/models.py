@@ -77,9 +77,13 @@ class family_info(models.Model):
 
 class admission_details(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)
-    ssc_marks=models.DecimalField(decimal_places=2,max_digits=5)
+    jee_marks=models.DecimalField(decimal_places=2,max_digits=5)
     hsc_marks=models.DecimalField(decimal_places=2,max_digits=5)
+    cet_marks=models.DecimalField(decimal_places=2,max_digits=5)
     diploma_marks=models.DecimalField(decimal_places=2,max_digits=5)
+    year_admission=models.IntegerField()
+    category_admission=models.CharField(max_length=50)
+
 
     
 
