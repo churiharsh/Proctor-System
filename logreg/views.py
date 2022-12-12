@@ -33,7 +33,7 @@ def login(request):
         print(user)
         if user is not None: 
             auth.login(request,user)
-            return redirect('admission/proctor_form')    
+            return redirect('/admission/')    
         else:
             print("Invalid Credentials")
             return render(request,'login.html')    

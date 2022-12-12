@@ -1,15 +1,22 @@
-# from django import forms
-# from django.forms import ModelForm
-# from . models import admission_details
-# from django.contrib.auth.models import User
+from django import forms
+from django.forms import ModelForm
+from . models import admission_details,personal_details
+from django.contrib.auth.models import User
 
-# class admissionForm(ModelForm):
-#      class Meta:
-#         model = admission_details
-#         fields = ['year_admission','category_admission','hsc_marks','cet_marks','jee_marks','diploma_marks','user']
+class admissionForm(ModelForm):
+     class Meta:
+        model = admission_details
+        fields = ['year_admission','category_admission','hsc_marks','cet_marks','jee_marks','diploma_marks']
 
 
-# # form=admissionForm()        
+class personalDetailsForm(ModelForm):
+        class Meta:
+                model = personal_details
+                fields = ['birth_place','mother_tongue','religion','address','phone_number','email','blood_group','guardian_name','birth_date']
+
+
+
+# form=admissionForm()        
 
 
 

@@ -18,13 +18,43 @@
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
     
         <link rel="stylesheet" href="/static/css/usersite/admission.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+        <script>
+            window.addEventListener("load",(event)=>{
+                console.log('Hello');
+                
+            })
+        </script>
+</head>
         
-    </head>
+    
     <body >
+
+            <div  id="myModal" class="modal fade" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Modal title</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <p>Modal body text goes here.</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-primary">Save changes</button>
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </form>
      
     
     <div class="container">
-    <form action="" method="post">
+    <form  method="post">
         {% csrf_token %}
     
         <div class="nav_log">
@@ -83,11 +113,11 @@
             <table>
                 <tbody>
                     <tr>
-                        <td colspan="3">Surname : <input id="surname" type="text" value="{{admission1.surname}}" name="surname"></td>
+                        <td colspan="3">Surname : <input id="surname" type="text" value="{{user.last_name}}" name="surname"></td>
                         
-                        <td colspan="3">First Name : <input id="name" type="text" value="{{admission1.name}}" name="name"></td>
+                        <td colspan="3">First Name : <input id="name" type="text" value="{{user.first_name}}" name="name"></td>
                         
-                        <td colspan="3">Middle Name : <input id="midname" type="text" value="{{admission1.midname}}" name="midname"></td>
+                        <td colspan="3">Middle Name : <input id="midname" type="text" value="{{user.midname}}" name="midname"></td>
     
                         
                     </tr>
@@ -137,20 +167,20 @@
                     
                     
                     <td>Year of Admission</td>
-                    <td><input type="text" value="{{admission1.year}}" name="year_admission" onkeypress='validate(event)'></td>
+                    <td>{{form.year_admission}}</td>
                     <td>Category of Admission</td>
-                    <td><input type="text" value="{{admission1.category}}" name="category_admission" ></td>
+                    <td>{{form.category_admission}}</td>
                     <td>HSC (%)</td>
-                    <td><input type="text" value="{{admission1.hsc}}" name="hsc_marks" onkeypress='validate(event)'></td>
+                    <td>{{form.hsc_marks}}</td>
                 </tr>
     
                 <tr>
                     <td>CET Score</td>
-                    <td><input type="text" value="{{admission1.cet}}" name="cet_marks" onkeypress='validate(event)'></td>
+                    <td>{{form.cet_marks}}</td>
                     <td>JEE Score</td>
-                    <td><input type="text" value="{{admission1.jee}}" name="jee_marks"onkeypress='validate(event)'></td>
+                    <td>{{form.jee_marks}}</td>
                     <td>Diploma (%)</td>
-                    <td><input type="text" value="{{admission1.diploma}}"  name="diploma_marks" onkeypress='validate(event)'></td>
+                    <td>{{form.diploma_marks}}</td>
     
                 </tr>
             </table>
@@ -159,7 +189,7 @@
     
         <div class="container" id="bottombtns">
            <!--  <a href="personalinfo.jsp"> -->
-        <a href="/">
+        <a >
                 <input class="btn btn-primary submit-btn" id="next"type="submit" value="Next" style="float: right;"  min="0" max="500000000000">  
             </a>
             <a href="">
@@ -174,7 +204,9 @@
         
         
     </form>
+    
       <script src="static/js/usersite/keychecker.js"></script>
+      <!-- <script src="static/js/usersite/onload.js"></script> -->
       <!-- <script src="./localstorage.js"></script>
       <script src="scrpit2.js"></script> -->
       

@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from phonenumber_field.modelfields import PhoneNumberField
-from datetime import datetime
+from datetime import datetime,date
 
 
 
@@ -12,13 +12,16 @@ class personal_details(models.Model):
     # last_name=models.ForeignKey(last_name,max_length=50,on_delete=models.CASCADE)
     middle_name=models.CharField(max_length=30)
     birth_place=models.CharField(max_length=30)
+    birth_date=models.DateField()
     mother_tongue=models.CharField(max_length=30)
     phone_number=models.CharField(max_length=30)
-    guardian_name=models.CharField(max_length=30),
+    guardian_name=models.CharField(max_length=30,default="NULL")
     religion=models.CharField(max_length=30)
     blood_group=models.CharField(max_length=30)
+    address=models.CharField(max_length=100,default="NULL")
     stud_image=models.ImageField()
     stud_sign_image=models.ImageField()
+    email=models.CharField(max_length=30,default="NULL")
     family_income=models.IntegerField()
 
 
@@ -27,8 +30,18 @@ class personal_details(models.Model):
 class current_semester(models.Model):
     # email=models.ForeignKey(User,on_delete=models.CASCADE)    
     user =models.ForeignKey(User,on_delete=models.CASCADE)    
-    current_sem=models.IntegerField()
-    current_sem_num=models.IntegerField()
+    current_year=models.IntegerField(default=2020)
+    # CURRENT_SEM_CHOICES =[
+    #     ('SEM 1','SEM 1'),
+    #     ('SEM 2','SEM 2'),
+    #     ('SEM 3','SEM 3'),
+    #     ('SEM 4','SEM 4'),
+    #     ('SEM 5','SEM 5'),
+    #     ('SEM 6','SEM 6'),
+    #     ('SEM 7','SEM 7'),
+    #     ('SEM 8','SEM 8'),
+    # ]
+    current_sem=models.CharField(max_length=50)
 
 
 
@@ -77,12 +90,14 @@ class family_info(models.Model):
 
 class admission_details(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)
-    jee_marks=models.DecimalField(decimal_places=2,max_digits=5)
-    hsc_marks=models.DecimalField(decimal_places=2,max_digits=5)
-    cet_marks=models.DecimalField(decimal_places=2,max_digits=5)
-    diploma_marks=models.DecimalField(decimal_places=2,max_digits=5)
-    year_admission=models.IntegerField()
+    jee_marks=models.DecimalField(max_length=50,max_digits=5,decimal_places=2)
+    hsc_marks=models.DecimalField(max_length=50,max_digits=5,decimal_places=2)
+    cet_marks=models.DecimalField(max_length=50,max_digits=5,decimal_places=2)
+    diploma_marks=models.DecimalField(max_length=50,max_digits=5,decimal_places=2)
+    year_admission=models.IntegerField(default=0000)
     category_admission=models.CharField(max_length=50)
+
+    
 
 
     
