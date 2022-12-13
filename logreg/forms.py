@@ -17,3 +17,8 @@ class NewUserForm(UserCreationForm):
         if commit:
             user.save()
         return user
+
+# class extraDetailsForm(ModelForm):
+#     class Meta:
+#         model = current_semester
+#         fields = ['admission_year','current_sem']

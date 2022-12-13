@@ -21,25 +21,24 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView
 
-# from models import AuthUser
-# Create your views here.
-
-
-# logdetails=request.session['username']
+# def index(request):
+#     return redirect('S/')
 
 def login(request):
     if request.method == 'POST':
-        username=request.POST['username']
+        # email=request.POST['email']
         password=request.POST['password']
+        username=request.POST['username']
         user=auth.authenticate(username=username,password=password)
-        if user is not None:
-                auth.login(request,user)
-                return redirect('admission')
+        print(user)
+        if user is not None: 
+            auth.login(request,user)
+            return redirect('/admission/')    
         else:
-            messages.info(request,'Invalid Credentials')
-            return redirect('login')
+            print("Invalid Credentials")
+            return render(request,'login.html')    
     else:        
-     return render(request,'login.html')
+     return render(request,'/')
 
 
 # def login(request):
