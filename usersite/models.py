@@ -1,117 +1,103 @@
 from django.db import models
 from django.contrib.auth.models import User
-from phonenumber_field.modelfields import PhoneNumberField
-from datetime import datetime
-# # Create your models here.
-# class ToDoList(models.Model):
-#     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="todolist", null=True) # <--- added
-#     name = models.CharField(max_length=200)
-
-#     def __str__(self):
-# 	       return self.name
 
 
-# class Item(models.Model):
-#     todolist = models.ForeignKey(ToDoList, on_delete=models.CASCADE)
-#     text = models.CharField(max_length=300)
-#     complete = models.BooleanField()
 
-#     def __str__(self):
-# 	       return self.text
+class personal_details(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    # email=models.ForeignKey(User,on_delete=models.CASCADE)
+    middle_name=models.CharField(max_length=30)
+    birth_place=models.CharField(max_length=30)
+    birth_date=models.DateField()
+    mother_tongue=models.CharField(max_length=30)
+    phone_number=models.CharField(max_length=30)
+    guardian_name=models.CharField(max_length=30,default="NULL")
+    religion=models.CharField(max_length=30)
+    blood_group=models.CharField(max_length=30)
+    disease=models.CharField(max_length=30,default="None")
+    address=models.CharField(max_length=100,default="NULL")
+    stud_image=models.ImageField(upload_to ="images/")
+    stud_sign_image=models.ImageField(upload_to ="images/")
+    email=models.CharField(max_length=30,default="NULL")
+    family_income=models.IntegerField(default=10000)
 
-class admission(models.Model):
-    """ COURSES = (
-    ('Select your branch', 'Select your branch'),
-    ('Computer Science Engineering', 'Computer Science Engineering'),
-    ('Information Technology Engineering', 'Information Technology Engineering'),
-    ('Electronics and Telecommunication Engineering', 'Electronics and Telecommunication Engineering'),
-    ('Electronics Engineering', 'Electronics Engineering'),
-    )
-    course = models.CharField(max_length=100, choices= COURSES, default='Select your branch') """
-    procname = models.CharField(max_length=45, blank=True, null=True)
-    surname = models.CharField(max_length=45, blank=True, null=True)
-    name = models.CharField(max_length=45, blank=True, null=True)
-    midname = models.CharField(max_length=45, blank=True, null=True)
-    student_image = models.ImageField(upload_to='users/%Y/%m/%d/', blank=True)
 
-    rollsem1 = models.CharField(max_length=3, blank=True, null=True) 
-    rollsem2 = models.CharField(max_length=3, blank=True, null=True)
-    rollsem3 = models.CharField(max_length=3, blank=True, null=True)
-    rollsem4 = models.CharField(max_length=3, blank=True, null=True)
-    rollsem5 = models.CharField(max_length=3, blank=True, null=True)
-    rollsem6 = models.CharField(max_length=3, blank=True, null=True)
-    rollsem7 = models.CharField(max_length=3, blank=True, null=True)
-    rollsem8 = models.CharField(max_length=3, blank=True, null=True)
+
+
+class current_semester(models.Model):
+    # email=models.ForeignKey(User,on_delete=models.CASCADE)    
+    user =models.ForeignKey(User,on_delete=models.CASCADE)    
+    current_year=models.IntegerField(default=2020)
+    # CURRENT_SEM_CHOICES =[
+    #     ('SEM 1','SEM 1'),
+    #     ('SEM 2','SEM 2'),
+    #     ('SEM 3','SEM 3'),
+    #     ('SEM 4','SEM 4'),
+    #     ('SEM 5','SEM 5'),
+    #     ('SEM 6','SEM 6'),
+    #     ('SEM 7','SEM 7'),
+    #     ('SEM 8','SEM 8'),
+    # ]
+    current_sem=models.CharField(max_length=50)
+
+
+
+class semester_sub_ia(models.Model):
+    # email=models.ForeignKey(User,on_delete=models.CASCADE)
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    current_semester=models.ForeignKey('current_semester',on_delete=models.CASCADE)
+    sub_1=models.CharField(max_length=30)
+    sub_2=models.CharField(max_length=30)
+    sub_3=models.CharField(max_length=30)
+    sub_4=models.CharField(max_length=30)
+    sub_5=models.CharField(max_length=30)
+    sub_6=models.CharField(max_length=30)
+
+
+class attendance(models.Model):
+    current_sem=models.ForeignKey('current_semester',on_delete=models.CASCADE)
+    # email=models.ForeignKey(user,on_delete=models.CASCADE)
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    default_list_num=models.IntegerField()
+    is_defaulter=models.BooleanField()
+
+
+
+    # family models
+
+class family_relation(models.Model):
+    # email=models.ForeignKey(User,on_delete=models.CASCADE)
+      user=models.ForeignKey(User,on_delete=models.CASCADE)
+      relation_type=models.CharField(max_length=30)
+
+
+
+class family_info(models.Model):
+    # email=models.ForeignKey(User,on_delete=models.CASCADE)
+    user =models.ForeignKey(User,on_delete=models.CASCADE)
+    femail=models.CharField(max_length=50)
+    name=models.CharField(max_length=50)
+    age=models.IntegerField()
+    contact_num=models.CharField(max_length=30)
+    qualification=models.CharField(max_length=30)
+    occupation=models.CharField(max_length=30)
+    relation_type=models.ForeignKey('family_relation',on_delete=models.CASCADE)
+
+
+
+class admission_details(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    jee_marks=models.DecimalField(max_length=50,max_digits=5,decimal_places=2)
+    hsc_marks=models.DecimalField(max_length=50,max_digits=5,decimal_places=2)
+    cet_marks=models.DecimalField(max_length=50,max_digits=5,decimal_places=2)
+    diploma_marks=models.DecimalField(max_length=50,max_digits=5,decimal_places=2)
+    year_admission=models.IntegerField(default=0000)
+    category_admission=models.CharField(max_length=50)
+
     
-    year = models.CharField(max_length=45, blank=True, null=True)
-    category = models.CharField(max_length=45, blank=True, null=True)
-    hsc = models.CharField(max_length=45, blank=True, null=True)
-    cet = models.CharField(max_length=45, blank=True, null=True)
-    jee = models.CharField(max_length=45, blank=True, null=True)
-    diploma = models.CharField(max_length=45, blank=True, null=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+
+    
 
 
 
-
-class personalinfo(models.Model):
-
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
-    #dob = models.DateField(default=datetime.now, null = True,blank=True) 
-    dob = models.CharField(max_length=45,blank=True, null=True)
-    birthplace = models.CharField(max_length=45, blank=True, null=True)
-    mothertongue = models.CharField(max_length=45, blank=True, null=True)
-    caste = models.CharField(max_length=45, blank=True, null=True)
-    nameofparent = models.CharField(max_length=45, blank=True, null=True)
-    address = models.CharField(max_length=100,default=None,blank=True, null=True)
-    #mobnumber = PhoneNumberField(blank=True,null=True)
-    mobnumber = models.CharField(max_length=12,blank=True, null=True)
-    emailid = models.EmailField(default=None,blank=True, null=True)
-    bloodgroup = models.CharField(max_length=45, blank=True, null=True)
-    disease = models.CharField(max_length=45,default=None,blank=True, null=True)
-
-    fathername = models.CharField(max_length=45, blank=True, null=True)
-    mothername = models.CharField(max_length=45, blank=True, null=True)
-    fatherage = models.IntegerField(default=None,blank=True, null=True)
-    motherage = models.IntegerField(default=None,blank=True, null=True)
-    Faddress = models.CharField(max_length=100,default=None,blank=True, null=True)
-    Maddress = models.CharField(max_length=100,default=None,blank=True, null=True)
-    Fnumber = PhoneNumberField(blank=True,null=True)
-    Mnumber = PhoneNumberField(blank=True,null=True)
-    Fmail = models.EmailField(default=None,blank=True, null=True)
-    Mmail = models.EmailField(default=None,blank=True, null=True)
-    Fqualify = models.CharField(max_length=45, blank=True, null=True)
-    Mqualify = models.CharField(max_length=45, blank=True, null=True)
-    Foccupation = models.CharField(max_length=45, blank=True, null=True)
-    Moccupation = models.CharField(max_length=45, blank=True, null=True)
-
-    S1name = models.CharField(max_length=45, blank=True, null=True)
-    S2name = models.CharField(max_length=45, blank=True, null=True)
-    S3name = models.CharField(max_length=45, blank=True, null=True)
-    S1age = models.IntegerField(default=0,blank=True, null=True)
-    S2age = models.IntegerField(default=0,blank=True, null=True)
-    S3age = models.IntegerField(default=0,blank=True, null=True)
-    S2number = PhoneNumberField(blank=True,null=True)
-    S1number = PhoneNumberField(blank=True,null=True)
-    S3number = PhoneNumberField(blank=True,null=True)
-    S1qualify = models.CharField(max_length=45, blank=True, null=True)
-    S2qualify = models.CharField(max_length=45, blank=True, null=True)
-    S3qualify = models.CharField(max_length=45, blank=True, null=True)
-    S1occupation = models.CharField(max_length=45, blank=True, null=True)
-    S2occupation = models.CharField(max_length=45, blank=True, null=True)
-    S3occupation = models.CharField(max_length=45, blank=True, null=True)
-
-    income = models.IntegerField(default=0,blank=True, null=True)
-
-
-
-class academic(models.Model):
-
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
-
-    s1s1 = models.IntegerField()
-    s1s2 = models.IntegerField()
-    s1s3 = models.IntegerField()
-    s1s4 = models.IntegerField()
-    s1s5 = models.IntegerField()
-    s1s6 = models.IntegerField()

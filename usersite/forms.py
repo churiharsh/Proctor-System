@@ -1,22 +1,27 @@
+from django import forms
 from django.forms import ModelForm
-from usersite.models import admission, personalinfo , academic
+from . models import admission_details,personal_details
 from django.contrib.auth.models import User
 
-
 class admissionForm(ModelForm):
-    class Meta:
-        model = admission
-        fields = ['procname','surname','name','midname','student_image','rollsem1','rollsem2','rollsem3','rollsem4','rollsem5','rollsem6','rollsem7','rollsem8','year','category','hsc','cet','jee','diploma']
+     class Meta:
+        model = admission_details
+        fields = ['year_admission','category_admission','hsc_marks','cet_marks','jee_marks','diploma_marks']
+
+
+class personalDetailsForm(ModelForm):
+        class Meta:
+                model = personal_details
+                widgets ={
+                        'birth_date':forms.TextInput(attrs={'placeholder':'YYYY/MM/DD'})
+                 }
+                fields = ['birth_place','mother_tongue','religion','address','phone_number','email','blood_group','guardian_name','birth_date','stud_sign_image','disease']
 
 
 
-class personalinfoForm(ModelForm):
-    class Meta:
-        model = personalinfo
-        fields = ['dob','birthplace','mothertongue','caste','nameofparent','address','mobnumber','emailid','bloodgroup','disease','fathername','mothername','fatherage','motherage','Faddress','Maddress','Fnumber','Mnumber','Fmail','Mmail','Fqualify','Mqualify','Foccupation','Moccupation','S1name','S2name','S3name','S1age','S2age','S3age', 'S1number','S2number','S3number','S1qualify','S2qualify','S3qualify','S1occupation','S2occupation','S3occupation','income']
+# class familyDetailsForm(ModelForm):
+#         class Meta:
+#                 model = fami
 
 
-class academicForm(ModelForm):
-    class Meta:
-        model = academic
-        fields = ['s1s1','s1s2','s1s3','s1s4','s1s5','s1s6']
+
