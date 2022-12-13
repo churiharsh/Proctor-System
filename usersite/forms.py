@@ -12,12 +12,16 @@ class admissionForm(ModelForm):
 class personalDetailsForm(ModelForm):
         class Meta:
                 model = personal_details
-                fields = ['birth_place','mother_tongue','religion','address','phone_number','email','blood_group','guardian_name','birth_date']
+                widgets ={
+                        'birth_date':forms.TextInput(attrs={'placeholder':'YYYY/MM/DD'})
+                 }
+                fields = ['birth_place','mother_tongue','religion','address','phone_number','email','blood_group','guardian_name','birth_date','stud_sign_image','disease']
 
 
 
-# form=admissionForm()        
-
+# class familyDetailsForm(ModelForm):
+#         class Meta:
+#                 model = fami
 
 
 

@@ -1,15 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
-from phonenumber_field.modelfields import PhoneNumberField
-from datetime import datetime,date
 
 
 
 class personal_details(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     # email=models.ForeignKey(User,on_delete=models.CASCADE)
-    # first_name=models.ForeignKey(first_name,max_length=50,on_delete=models.CASCADE)
-    # last_name=models.ForeignKey(last_name,max_length=50,on_delete=models.CASCADE)
     middle_name=models.CharField(max_length=30)
     birth_place=models.CharField(max_length=30)
     birth_date=models.DateField()
@@ -18,11 +14,12 @@ class personal_details(models.Model):
     guardian_name=models.CharField(max_length=30,default="NULL")
     religion=models.CharField(max_length=30)
     blood_group=models.CharField(max_length=30)
+    disease=models.CharField(max_length=30,default="None")
     address=models.CharField(max_length=100,default="NULL")
-    stud_image=models.ImageField()
-    stud_sign_image=models.ImageField()
+    stud_image=models.ImageField(upload_to ="images/")
+    stud_sign_image=models.ImageField(upload_to ="images/")
     email=models.CharField(max_length=30,default="NULL")
-    family_income=models.IntegerField()
+    family_income=models.IntegerField(default=10000)
 
 
 

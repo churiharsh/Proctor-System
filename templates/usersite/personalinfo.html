@@ -22,7 +22,7 @@
 </head>
 <body>
 
-<form action="submit_personalinfo/" method="post">
+<form enctype="multipart/form-data" method="post">
 		{% csrf_token %}
 		<div class="container">
 
@@ -47,46 +47,44 @@
 					<tbody>
 	
 						<tr>
-							<td>Date of Birth: <input type="date" value="{{personalinfo1.dob}}" class="input"
-								name="dob"  value=""></td>
-							<td>Birth Place: <input type="text" value="{{personalinfo1.birthplace}}" name="birthplace" ></td>
+							<td>Date of Birth: {{form.birth_date}}</td>
+							<td>Birth Place: {{form.birth_place}}</td>
 						</tr>
 	
 						<tr>
-							<td>Mother tongue: <input type="text" name="mothertongue" value="{{personalinfo1.mothertongue}}"></td>
-							<td>Caste/Religion: <input type="text" name="caste" value="{{personalinfo1.caste}}"></td>
+							<td>Mother tongue: {{form.mother_tongue}}</td>
+							<td>Caste/Religion: {{form.religion}}</td>
 						</tr>
 	
 						<tr>
-							<td colspan="2">Name of Parent/Local Guardian: <input type="text" id="input2" name="nameofparent" value="{{personalinfo1.nameofparent}}">
+							<td colspan="2">Name of Parent/Local Guardian: {{form.guardian_name}}
 							</td>
 						</tr>
 	
 						<tr>
-							<td colspan="2">Permanent Address: <input type="text"
-								id="input2" name="address" value="{{personalinfo1.address}}">
+							<td colspan="2">Permanent Address: {{form.address}}
 							</td>
 						</tr>
 	
 						<tr>
-							<td>Mobile Number: <input length=10 type="number" name="mobnumber" value="{{personalinfo1.mobnumber}}"></td>
-							<td>Email ID: <input type="email" name="emailid" value="{{personalinfo1.emailid}}"></td>
+							<td>Mobile Number: {{form.phone_number}}</td>
+							<td>Email ID: {{form.email}}</td>
 						</tr>
 	
 						<tr>
-							<td>Blood group: <input type="text" name="bloodgroup" value="{{personalinfo1.bloodgroup}}"></td>
-							<td>Any specific disease/disability: <input type="text" value="{{personalinfo1.disease}}" name="disease" onkeypress='validate(event)'></td>
+							<td>Blood group: {{form.blood_group}}</td>
+							<td>Any specific disease/disability: {{form.disease}}</td>
 						</tr>
 	
 						<tr>
-							<td colspan="2">Signature: <input type="file" id="myFile"
-								name="student_signature"> <input type="submit" value="Upload"
-								class="btn btn-primary">
+							<td colspan="2">Signature: {{form.stud_sign_image}}
 							</td>
 						</tr>
 					</tbody>
 				</table>
-	
+				<input class="btn btn-primary submit-btn" type="submit" value="save" style="float:right; padding:5px 50px;margin-right:30px" id="save" >  
+			</form>
+
 			</div>
 			<br> <br>
 	
@@ -304,7 +302,6 @@
 
 
 
-</form>
 
 	<!-- {% comment %} </form> {% endcomment %} -->
 
