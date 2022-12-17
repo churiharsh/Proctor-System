@@ -27,18 +27,25 @@ class personal_details(models.Model):
 class current_semester(models.Model):
     # email=models.ForeignKey(User,on_delete=models.CASCADE)    
     user =models.ForeignKey(User,on_delete=models.CASCADE)    
-    current_year=models.IntegerField(default=2020)
-    # CURRENT_SEM_CHOICES =[
-    #     ('SEM 1','SEM 1'),
-    #     ('SEM 2','SEM 2'),
-    #     ('SEM 3','SEM 3'),
-    #     ('SEM 4','SEM 4'),
-    #     ('SEM 5','SEM 5'),
-    #     ('SEM 6','SEM 6'),
-    #     ('SEM 7','SEM 7'),
-    #     ('SEM 8','SEM 8'),
-    # ]
-    current_sem=models.CharField(max_length=50)
+    CURRENT_YEAR_CHOICES =[
+        ('FE','FE'),
+        ('SE','SE'),
+        ('TE','TE'),
+        ('BE','BE'),
+        
+    ]
+    current_year=models.CharField(max_length=50,choices=CURRENT_YEAR_CHOICES)
+    CURRENT_SEM_CHOICES =[
+        ('SEM 1','SEM 1'),
+        ('SEM 2','SEM 2'),
+        ('SEM 3','SEM 3'),
+        ('SEM 4','SEM 4'),
+        ('SEM 5','SEM 5'),
+        ('SEM 6','SEM 6'),
+        ('SEM 7','SEM 7'),
+        ('SEM 8','SEM 8'),
+    ]
+    current_sem=models.CharField(max_length=50,choices=CURRENT_SEM_CHOICES)
 
 
 
@@ -68,20 +75,41 @@ class attendance(models.Model):
 class family_relation(models.Model):
     # email=models.ForeignKey(User,on_delete=models.CASCADE)
       user=models.ForeignKey(User,on_delete=models.CASCADE)
-      relation_type=models.CharField(max_length=30)
+      PARENT_CHOICES = (
+        ('Mother','MOTHER'),
+        ('Father','FATHER')
+      )
+      relation_type=models.CharField(max_length=30,choices=PARENT_CHOICES)
 
 
 
 class family_info(models.Model):
     # email=models.ForeignKey(User,on_delete=models.CASCADE)
     user =models.ForeignKey(User,on_delete=models.CASCADE)
-    femail=models.CharField(max_length=50)
     name=models.CharField(max_length=50)
     age=models.IntegerField()
+    address=models.CharField(max_length=50)
     contact_num=models.CharField(max_length=30)
+    email=models.EmailField(max_length=50,default='xyz@gmail.com')
     qualification=models.CharField(max_length=30)
     occupation=models.CharField(max_length=30)
-    relation_type=models.ForeignKey('family_relation',on_delete=models.CASCADE)
+    parent_image =models.ImageField()
+    parent_sign =models.ImageField()
+    relation=models.ForeignKey('family_relation',on_delete=models.CASCADE)
+
+# class family_info(models.Model):
+#     # email=models.ForeignKey(User,on_delete=models.CASCADE)
+#     user =models.ForeignKey(User,on_delete=models.CASCADE)
+#     mname=models.CharField(max_length=50)
+#     mage=models.IntegerField()
+#     maddress=models.CharField(max_length=50)
+#     mcontact_num=models.CharField(max_length=30)
+#     memail=models.EmailField(max_length=50,default='xyz@gmail.com')
+#     mqualification=models.CharField(max_length=30)
+#     moccupation=models.CharField(max_length=30)
+#     mparent_image =models.ImageField()
+#     mparent_sign =models.ImageField()
+    # relation_type=models.ForeignKey('family_relation',on_delete=models.CASCADE)
 
 
 
