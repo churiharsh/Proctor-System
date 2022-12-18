@@ -82,8 +82,7 @@
 						</tr>
 					</tbody>
 				</table>
-				<input class="btn btn-primary submit-btn" type="submit" value="save" style="float:right; padding:5px 50px;margin-right:30px" id="save" >  
-			</form>
+				
 
 			</div>
 			<br> <br>
@@ -107,68 +106,65 @@
 					<thead>
 						<tr>
 							<th>Detail</th>
-							<th>Father</th>
-							<th>Mother</th>
+							<th>{{form2.prelation}}</th>
+							<th>{{form3.prelation}}</th>
 						</tr>
 					</thead>
 	
 					<tbody>
 						<tr>
 							<td>Name</td>
-							<td>{{fatherForm.fname}}</td>
-							<td><input type="text" name="mothername" value="{{personalinfo1.mothername}}" ></td>
+							<td>{{form2.pname}}</td>
+							<td>{{form3.pname}}</td>
 						</tr>
 						<tr>
 							<td>Age</td>
-							<td>{{fatherForm.fage}}</td>
-							<td><input type="number" name="motherage" onkeypress='validate(event)' value="{{personalinfo1.motherage}}"></td>
+							<td>{{form2.page}}</td>
+							<td>{{form3.page}}</td>
 						</tr>
 	
 						<tr>
 							<td>Photograph</td>
-							<td><input type="file" id="myFile"> <br> <br>
-								{{fatherForm.fparent_image}}</td>
-							<td><input type="file" id="myFile"> <br> <br>
-								<input type="submit" value="Upload" class="btn btn-primary"
-								id="btn"></td>
+							<td>{{form2.parent_image}}<br> <br>
+							</td>
+							<td>{{form3.parent_image}} <br> <br>
+								</td>
 						</tr>
 	
 						<tr>
 							<td>Address</td>
-							<td>{{fatherForm.faddress}}</td>
-							<td><textarea name="Maddress" value="{{personalinfo1.Maddress}form}"></textarea></td>
+							<td>{{form2.paddress}}</td>
+							<td>{{form3.paddress}}</textarea></td>
 						</tr>
 	
 						<tr>
 							<td>Contact Number</td>
-							<td>{{fatherForm.fcontact_num}}</td>
-							<td><input type="number" name="Mnumber" onkeypress='validate(event)' value="{{personalinfo1.Mnumber}}"></td>
+							<td>{{form2.pcontact_num}}</td>
+							<td>{{form3.pcontact_num}}</td>
 						</tr>
 	
 						<tr>
 							<td>Email ID</td>
-							<td>{{fatherForm.femail}}</td>
-							<td><input type="email" name="Mmail"></td>
+							<td>{{form2.pemail}}</td>
+							<td>{{form3.pemail}}</td>
 						</tr>
 	
 						<tr>
 							<td>Qualification</td>
-							<td>{{fatherForm.fqualification}}</td>
-							<td><input type="text" name="Mqualify" value="{{personalinfo1.Mqualify}}"></td>
+							<td>{{form2.pqualification}}</td>
+							<td>{{form3.pqualification}}</td>
 						</tr>
 	
 						<tr>
 							<td>Occupation</td>
-							<td>{{fatherForm.foccupation}}</td>
-							<td><input type="text" name="Moccupation" value="{{personalinfo1.Moccupation}}" ></td>
+							<td>{{form2.poccupation}}</td>
+							<td>{{form3.poccupation}}</td>
 						</tr>
 	
 						<tr>
 							<td>Signature</td>
-							<td>{{fatherForm.fparent_sign}}</td>
-							<td><input type="file" id="myFile"> <br> <br>
-								<input type="submit" value="Upload" class="btn btn-primary"
-								id="btn"></td>
+							<td>{{form2.parent_sign}}</td>
+							<td>{{form3.parent_sign}}</td>
 						</tr>
 	
 	
@@ -191,70 +187,47 @@
 						<tr>
 							<th>Detail</th>
 							<th>Sibling I</th>
-							<th>Sibling II</th>
-							<th>Sibling III</th>
+							
 						</tr>
 					</thead>
 	
 					<tbody>
 						<tr>
 							<td>Name</td>
-							<td><input type="text" name="S1name" value="{{personalinfo1.S1name}}" ></td>
-							<td><input type="text" name="S2name" value="{{personalinfo1.S2name}}" ></td>
-							<td><input type="text" name="S3name" value="{{personalinfo1.S3name}}" ></td>
+							<td>{{sib.sib_name}}</td>
+							
 						</tr>
 	
 						<tr>
 							<td>Gender</td>
-							<td><select name="S1gender" id="">
-									<option value="default" selected>..</option>
-									<option value="male">Male</option>
-									<option value="female">Female</option>
-									<option value="Other">Other</option>
-							</select></td>
+							<td>{{sib.sib_gender}}</td>
 	
-							<td><select name="S2gender" id="">
-									<option value="default" selected>..</option>
-									<option value="male" >Male</option>
-									<option value="female">Female</option>
-									<option value="Other">Other</option>
-							</select></td>
-	
-							<td><select name="S3gender" id="">
-									<option value="default" selected>..</option>
-									<option value="male">Male</option>
-									<option value="female">Female</option>
-									<option value="Other">Other</option>
-							</select></td>
+							
 						</tr>
 	
 						<tr>
 							<td>Age</td>
-							<td><input type="number" name="S1age" value="{{personalinfo1.S1age}}" onkeypress='validate(event)'></td>
-							<td><input type="number" name="S2age" value="{{personalinfo1.S2age}}" onkeypress='validate(event)'></td>
-							<td><input type="number" name="S3age" value="{{personalinfo1.S3age}}" onkeypress='validate(event)'></td>
+							<td>{{sib.sib_age}}</td>
+							
 						</tr>
 	
 						<tr>
 							<td>Contact Number</td>
-							<td><input type="number" name="S1number" value="{{personalinfo1.S1number}}" onkeypress='validate(event)'></td>
-							<td><input type="number" name="S2number"  value="{{personalinfo1.S2number}}" onkeypress='validate(event)'></td>
-							<td><input type="number" name="S3number" value="{{personalinfo1.S3number}}" onkeypress='validate(event)'></td>
+							<td>{{sib.sib_contact_num}}</td>
+							
 						</tr>
 	
 	
 						<tr>
 							<td>Qualification</td>
-							<td><input type="text" name="S1qualify" value="{{personalinfo1.S1qualify}}"></td>
-							<td><input type="text" name="S2qualify" value="{{personalinfo1.S2qualify}}" ></td>
-							<td><input type="text" name="S3qualify" value="{{personalinfo1.S3qualify}}" ></td>
+							<td>{{sib.sib_qualification}}</td>
+							
 						</tr>
 	
 						<tr>
 							<td>Occupation</td>
-							<td><input type="text" name="S1occupation" value="{{personalinfo1.S1occupation}}"></td>
-							<td><input type="text" name="S2occupation" value="{{personalinfo1.S2occupation}}" ></td>
-							<td><input type="text" name="S3occupation" value="{{personalinfo1.S3occupation}}" ></td>
+							<td>{{sib.sib_occupation}}</td>
+							
 						</tr>
 	
 	
@@ -266,7 +239,7 @@
 				<br>
 	
 				<h5>
-					Approximate annual family income: <input type="number" name="income"  value="{{personalinfo.income}}" placeholder="Enter your income" onkeypress='validate(event)'>
+					Approximate annual family income: {{form.family_income}}
 				</h5>
 	
 			</div>
@@ -285,6 +258,8 @@
 	
 			  <input class="btn btn-primary submit-btn" type="button" value="Back" style="width:127px;" >  
 			</div>
+		</form>
+
 	
 			<div style="padding-bottom: 100px;"></div>
 	

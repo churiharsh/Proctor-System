@@ -8,8 +8,8 @@ from django.shortcuts import redirect
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User,auth
-from .forms import admissionForm,personalDetailsForm,extraDetailsForm
-from . models import admission_details,personal_details,current_semester
+from .forms import admissionForm,personalDetailsForm,extraDetailsForm,siblingDetailsForm
+from . models import admission_details,personal_details,current_semester,sibling_details
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from logreg.views import registration
@@ -30,25 +30,6 @@ def home_view(request):
   return render(request,"admission.html")
 
 
-
-# def admission_details(request):
-#   if(request.method =='POST'):
-#        yearAdmission=int(request.POST['year_admission'])
-#        categoryAdmission=request.POST['category_admission']
-#        hscMarks=request.POST['hsc_marks']
-#        cetMarks=request.POST['cet_marks']
-#        jeeMarks=request.POST['jee_marks']
-#        diplomaMarks=request.POST['diploma_marks']
-#        userName=request.user
-#        user=User.objects.get(username=userName)
-#        print(user)
-#        adm=admission_details(year_admission='2018',category_admission='TFWS',hsc_marks='56.5',cet_marks='45.3',jee_marks='34.6',diploma_marks='56.4',user=user)
-#        adm.save()
-#        return redirect('personalinfo.html')
-#   else:
-#        return render(request,'admission.html') 
-
-#   return render(request,'admission.html')
 
 
 
@@ -97,48 +78,66 @@ def stud_personal_details(request):
     if request.method == 'POST':
         if request.user.is_authenticated:
            psnl_details=personal_details.objects.filter(user=request.user).first()
-           family_details_form=family_info.objects.filter(user=request.user).first()
+           father_details=family_info_father.objects.filter(user=request.user).first()
+           mother_details=family_info_mother.objects.filter(user=request.user).first()
+           
+           siblingobj = sibling_details.objects.filter(user=request.user).first()
 
 
-        #    psnl_details=personal_details.objects.get(user=request.user)
-        #    print(adm_details.year_admission)
+    
            form = personalDetailsForm(request.POST,request.FILES,instance=psnl_details)
-           familyForm = familyFatherDetailsForm(request.POST,request.FILES,instance=family_details_form)
-        #    motherForm = familyMotherDetailsForm(request.POST,request.FILES,instance=mother_details_form)
+           formFather = familyFormFather(request.POST,request.FILES,instance=father_details)
+           formMother = familyFormMother(request.POST,request.FILES,instance=mother_details)
+           sibform = siblingDetailsForm(request.POST,instance=siblingobj)
            for field in form:
                print(field.value())
 
-           if form.is_valid():
+           if form.is_valid() and form2.is_valid() and form3.is_valid():
             obj=form.save(commit=False)
-            obj2=familyForm.save(commit=False)
+            obj2=formFather.save(commit=False)
+            obj3=formMother.save(commit=False)
+            obj4=sibform.save(commit=False)
             obj.user = User.objects.get(pk=request.user.id)
             obj2.user = User.objects.get(pk=request.user.id)
+            obj3.user = User.objects.get(pk=request.user.id)
+            obj4.user = User.objects.get(pk=request.user.id)
             obj.save()
-            ob2.save()
+            obj2.save()
+            obj3.save()
+            obj4.save()
             return redirect('academic_details/')
   
     else:
         psnl_details = personal_details.objects.filter(user=request.user).first()
-        family_details_form=family_info.objects.filter(user=request.user).first()
+        father_details=family_info_father.objects.filter(user=request.user).first()
+        mother_details=family_info_mother.objects.filter(user=request.user).first()
+        siblingobj = sibling_details.objects.filter(user=request.user).first()
+
 
         
-        # father_details_form = family_info_father.objects.filter(user=request.user).first()
-        # mother_details_form = family_info_mother.objects.filter(user=request.user).first()
-        if not psnl_details and family_details_form :
+       
+        if not psnl_details and family_details and family_details2 and siblingobj:
             form = personalDetailsForm()
-            form2 = familyDetailsForm()
-            # motherForm = familyMotherDetailsForm()
+            formFather = familyFormFather()
+            formMother = familyFormMother()
+            sibform = siblingDetailsForm()
+
+
+
         else:
             form = personalDetailsForm(instance=psnl_details)    
-            form2 = familyDetailsForm(instance=family_details_form)
+            formFather = familyFormFather(instance=father_details)
+            formMother = familyFormMother(instance=mother_details)
+            sibform = siblingDetailsForm(instance = siblingobj)
+
 
            
             print("Hello else")
-            return render(request,'personalinfo.html',{'form':form,'form2':form2})
+            return render(request,'personalinfo.html',{'form':form,'formFather':formFather,'formMother':formMother,'sib':sibform})
 
     # form = personalDetailsForm()
     print("Hello")
-    return render(request,'personalinfo.html',{'form':form,'form2':form2})
+    return render(request,'personalinfo.html',{'form':form,'formFather':formFather,'formMother':formMother,'sib':sibform})
 
 
           

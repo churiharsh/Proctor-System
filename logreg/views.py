@@ -80,14 +80,13 @@ def registration(request):
                 user=User.objects.create_user(username=username,password=password1,email=email,first_name=firstname,last_name=lastname)
                 user.save()
                 print('user created')
-                return render(request,'login.html',{'form':form})
+                return render(request,'login.html')
 
          else:
             messages.info(request,'Password not matching')
-            return redirect('registration,',{'form':form})
+            return redirect('registration,')
     else:
-        form = extraDetailsForm()
-        return render(request,'registration.html',{'form':form})        
+        return render(request,'registration.html')        
 
 @login_required
 def logout_view(request):

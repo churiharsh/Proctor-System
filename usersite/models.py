@@ -45,8 +45,26 @@ class current_semester(models.Model):
         ('SEM 7','SEM 7'),
         ('SEM 8','SEM 8'),
     ]
+    BRANCH_CHOICES =[
+        ('INFT','INFT'),
+        ('MECHANICAL','MECHANICAL'),
+        ('AI & DS','AI & DS'),
+        ('CIVIL','CIVIL'),
+        ('CS','CS'),
+        ('EXTC','EXTC'),
+    ]
+    branch = models.CharField(max_length=50,choices =BRANCH_CHOICES,default='INFT')
     current_sem=models.CharField(max_length=50,choices=CURRENT_SEM_CHOICES)
 
+
+# class roll_numbers(models.Model):
+#     user=models.ForeignKey(User,on_delete=models.CASCADE)
+#     current_sem=models.ForeignKey('current_semester',on_delete=models.CASCADE)
+
+
+
+
+   
 
 
 class semester_sub_ia(models.Model):
@@ -72,44 +90,47 @@ class attendance(models.Model):
 
     # family models
 
-class family_relation(models.Model):
-    # email=models.ForeignKey(User,on_delete=models.CASCADE)
-      user=models.ForeignKey(User,on_delete=models.CASCADE)
-      PARENT_CHOICES = (
-        ('Mother','MOTHER'),
-        ('Father','FATHER')
-      )
-      relation_type=models.CharField(max_length=30,choices=PARENT_CHOICES)
+# class family_relation(models.Model):
+#     # email=models.ForeignKey(User,on_delete=models.CASCADE)
+#       user=models.ForeignKey(User,on_delete=models.CASCADE)
+#       PARENT_CHOICES = (
+#         ('MOTHER','MOTHER'),
+#         ('MOTHER','FATHER')
+#       )
+#       relation_type=models.CharField(max_length=30,choices=PARENT_CHOICES)
 
 
 
-class family_info(models.Model):
+class family_info_father(models.Model):
     # email=models.ForeignKey(User,on_delete=models.CASCADE)
     user =models.ForeignKey(User,on_delete=models.CASCADE)
-    name=models.CharField(max_length=50)
-    age=models.IntegerField()
-    address=models.CharField(max_length=50)
-    contact_num=models.CharField(max_length=30)
-    email=models.EmailField(max_length=50,default='xyz@gmail.com')
-    qualification=models.CharField(max_length=30)
-    occupation=models.CharField(max_length=30)
+    pname=models.CharField(max_length=50)
+    page=models.IntegerField()
+    paddress=models.CharField(max_length=50)
+    pcontact_num=models.CharField(max_length=30)
+    pemail=models.EmailField(max_length=50,default='xyz@gmail.com')
+    pqualification=models.CharField(max_length=30)
+    poccupation=models.CharField(max_length=30)
     parent_image =models.ImageField()
     parent_sign =models.ImageField()
-    relation=models.ForeignKey('family_relation',on_delete=models.CASCADE)
+    PARENT_CHOICES = (
+         ('MOTHER','MOTHER'),
+        ('MOTHER','FATHER')
+    )
+    prelation=models.CharField(max_length=30,choices =PARENT_CHOICES)
 
-# class family_info(models.Model):
-#     # email=models.ForeignKey(User,on_delete=models.CASCADE)
-#     user =models.ForeignKey(User,on_delete=models.CASCADE)
-#     mname=models.CharField(max_length=50)
-#     mage=models.IntegerField()
-#     maddress=models.CharField(max_length=50)
-#     mcontact_num=models.CharField(max_length=30)
-#     memail=models.EmailField(max_length=50,default='xyz@gmail.com')
-#     mqualification=models.CharField(max_length=30)
-#     moccupation=models.CharField(max_length=30)
-#     mparent_image =models.ImageField()
-#     mparent_sign =models.ImageField()
-    # relation_type=models.ForeignKey('family_relation',on_delete=models.CASCADE)
+class family_info_mother(models.Model):
+    # email=models.ForeignKey(User,on_delete=models.CASCADE)
+    user =models.ForeignKey(User,on_delete=models.CASCADE)
+    mname=models.CharField(max_length=50)
+    mage=models.IntegerField()
+    maddress=models.CharField(max_length=50)
+    mcontact_num=models.CharField(max_length=30)
+    memail=models.EmailField(max_length=50,default='xyz@gmail.com')
+    mqualification=models.CharField(max_length=30)
+    moccupation=models.CharField(max_length=30)
+    mparent_image =models.ImageField()
+    mparent_sign =models.ImageField()
 
 
 
@@ -121,6 +142,22 @@ class admission_details(models.Model):
     diploma_marks=models.DecimalField(max_length=50,max_digits=5,decimal_places=2)
     year_admission=models.IntegerField(default=0000)
     category_admission=models.CharField(max_length=50)
+
+
+class sibling_details(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    sib_name=models.CharField(max_length=50,default='NULL')
+    GENDER_CHOICES = (
+        ('MALE','MALE'),
+        ('FEMALE','FEMALE')
+        )
+    sib_gender = models.CharField(max_length=50,choices=GENDER_CHOICES)
+    sib_age=models.CharField(max_length=50)
+    sib_contact_num=models.CharField(max_length=30)
+    sib_qualification=models.CharField(max_length=30)
+    sib_occupation=models.CharField(max_length=30)
+
+
 
     
 
