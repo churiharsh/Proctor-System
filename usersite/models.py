@@ -104,20 +104,20 @@ class attendance(models.Model):
 class family_info_father(models.Model):
     # email=models.ForeignKey(User,on_delete=models.CASCADE)
     user =models.ForeignKey(User,on_delete=models.CASCADE)
-    pname=models.CharField(max_length=50)
-    page=models.IntegerField()
-    paddress=models.CharField(max_length=50)
-    pcontact_num=models.CharField(max_length=30)
-    pemail=models.EmailField(max_length=50,default='xyz@gmail.com')
-    pqualification=models.CharField(max_length=30)
-    poccupation=models.CharField(max_length=30)
-    parent_image =models.ImageField()
-    parent_sign =models.ImageField()
+    fname=models.CharField(max_length=50)
+    fage=models.IntegerField()
+    faddress=models.CharField(max_length=50)
+    fcontact_num=models.CharField(max_length=30)
+    femail=models.EmailField(max_length=50,default='xyz@gmail.com')
+    fqualification=models.CharField(max_length=30)
+    foccupation=models.CharField(max_length=30)
+    father_image =models.ImageField()
+    father_sign =models.ImageField()
     PARENT_CHOICES = (
          ('MOTHER','MOTHER'),
         ('MOTHER','FATHER')
     )
-    prelation=models.CharField(max_length=30,choices =PARENT_CHOICES)
+    # prelation=models.CharField(max_length=30,choices =PARENT_CHOICES)
 
 class family_info_mother(models.Model):
     # email=models.ForeignKey(User,on_delete=models.CASCADE)
@@ -129,8 +129,8 @@ class family_info_mother(models.Model):
     memail=models.EmailField(max_length=50,default='xyz@gmail.com')
     mqualification=models.CharField(max_length=30)
     moccupation=models.CharField(max_length=30)
-    mparent_image =models.ImageField()
-    mparent_sign =models.ImageField()
+    mother_image =models.ImageField()
+    mother_sign =models.ImageField()
 
 
 

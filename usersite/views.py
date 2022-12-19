@@ -8,8 +8,8 @@ from django.shortcuts import redirect
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User,auth
-from .forms import admissionForm,personalDetailsForm,extraDetailsForm,siblingDetailsForm
-from . models import admission_details,personal_details,current_semester,sibling_details
+from .forms import admissionForm,personalDetailsForm,extraDetailsForm,siblingDetailsForm,familyFormFather,familyFormMother
+from . models import admission_details,personal_details,current_semester,sibling_details,family_info_father,family_info_mother
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from logreg.views import registration
@@ -52,7 +52,7 @@ def adm_details(request):
             obj2.user = User.objects.get(pk=request.user.id)
             obj.save()
             obj2.save()
-            return redirect('personal_details/')
+            return redirect('page2/')
   
     else:
         adm_details=admission_details.objects.filter(user=request.user).first()
@@ -92,7 +92,7 @@ def stud_personal_details(request):
            for field in form:
                print(field.value())
 
-           if form.is_valid() and form2.is_valid() and form3.is_valid():
+           if form.is_valid() and formFather.is_valid() and formMother.is_valid():
             obj=form.save(commit=False)
             obj2=formFather.save(commit=False)
             obj3=formMother.save(commit=False)
@@ -105,7 +105,7 @@ def stud_personal_details(request):
             obj2.save()
             obj3.save()
             obj4.save()
-            return redirect('academic_details/')
+            return redirect('page2/')
   
     else:
         psnl_details = personal_details.objects.filter(user=request.user).first()
