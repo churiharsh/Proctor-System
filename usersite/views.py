@@ -126,6 +126,14 @@ def academicDetails(request):
 # def fam_details(request):
 
 
+def logout_view(request):
+    logout(request)
+    return render(request,'logout.html')
+
+def unauthorised(request):
+    return render(request,'unauthorised.html') 
+
+
 
 
 
