@@ -13,13 +13,14 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 from logreg.forms import NewUserForm
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User,auth
 from django.conf import settings
 from django.shortcuts import redirect
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView
+
 
 # def index(request):
 #     return redirect('S/')
@@ -69,11 +70,11 @@ def registration(request):
                  #messages.info(request,pop)
                  #pag.prompt(text="Username Taken")
                  #win32api.MessageBox(0, 'hello', 'title')
-                 return redirect('registration')
+                 return redirect('registration',{'form':form})
                 #  return render(request,'registration.html',{'error':'username already exists'})
              elif User.objects.filter(email=email).exists():
                  messages.info(request,'Email Taken')
-                 return redirect('registration')
+                 return redirect('registration',{'form':form})
                 #  return render(request,'registration.html',{'error':'email already exists'})
              else:   
                 user=User.objects.create_user(username=username,password=password1,email=email,first_name=firstname,last_name=lastname)
@@ -83,7 +84,7 @@ def registration(request):
 
          else:
             messages.info(request,'Password not matching')
-            return redirect('registration')
+            return redirect('registration,')
     else:
         return render(request,'registration.html')        
 

@@ -7,11 +7,9 @@ from django.conf import settings
 from django.conf.urls.static import static
 urlpatterns = [
     # path('',views.home_view),
-    path('',views.adm_details,name='admission'),
-    path('personal_details/',views.stud_personal_details, name='personalinfo'),
-    path('academic_details/',views.academicDetails),
-    path('logout', views.logout_view, name='logout'),
-    path('logreg/login/', auth_views.LoginView.as_view()),
+    path('',views.adm_details),
+    path('page1/',views.stud_personal_details),
+    path('page2/',views.academicDetails),
 ]
 
 if settings.DEBUG:

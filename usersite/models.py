@@ -27,19 +27,44 @@ class personal_details(models.Model):
 class current_semester(models.Model):
     # email=models.ForeignKey(User,on_delete=models.CASCADE)    
     user =models.ForeignKey(User,on_delete=models.CASCADE)    
-    current_year=models.IntegerField(default=2020)
-    # CURRENT_SEM_CHOICES =[
-    #     ('SEM 1','SEM 1'),
-    #     ('SEM 2','SEM 2'),
-    #     ('SEM 3','SEM 3'),
-    #     ('SEM 4','SEM 4'),
-    #     ('SEM 5','SEM 5'),
-    #     ('SEM 6','SEM 6'),
-    #     ('SEM 7','SEM 7'),
-    #     ('SEM 8','SEM 8'),
-    # ]
-    current_sem=models.CharField(max_length=50)
+    CURRENT_YEAR_CHOICES =[
+        ('FE','FE'),
+        ('SE','SE'),
+        ('TE','TE'),
+        ('BE','BE'),
+        
+    ]
+    current_year=models.CharField(max_length=50,choices=CURRENT_YEAR_CHOICES)
+    CURRENT_SEM_CHOICES =[
+        ('SEM 1','SEM 1'),
+        ('SEM 2','SEM 2'),
+        ('SEM 3','SEM 3'),
+        ('SEM 4','SEM 4'),
+        ('SEM 5','SEM 5'),
+        ('SEM 6','SEM 6'),
+        ('SEM 7','SEM 7'),
+        ('SEM 8','SEM 8'),
+    ]
+    BRANCH_CHOICES =[
+        ('INFT','INFT'),
+        ('MECHANICAL','MECHANICAL'),
+        ('AI & DS','AI & DS'),
+        ('CIVIL','CIVIL'),
+        ('CS','CS'),
+        ('EXTC','EXTC'),
+    ]
+    branch = models.CharField(max_length=50,choices =BRANCH_CHOICES,default='INFT')
+    current_sem=models.CharField(max_length=50,choices=CURRENT_SEM_CHOICES)
 
+
+# class roll_numbers(models.Model):
+#     user=models.ForeignKey(User,on_delete=models.CASCADE)
+#     current_sem=models.ForeignKey('current_semester',on_delete=models.CASCADE)
+
+
+
+
+   
 
 
 class semester_sub_ia(models.Model):
@@ -65,23 +90,47 @@ class attendance(models.Model):
 
     # family models
 
-class family_relation(models.Model):
-    # email=models.ForeignKey(User,on_delete=models.CASCADE)
-      user=models.ForeignKey(User,on_delete=models.CASCADE)
-      relation_type=models.CharField(max_length=30)
+# class family_relation(models.Model):
+#     # email=models.ForeignKey(User,on_delete=models.CASCADE)
+#       user=models.ForeignKey(User,on_delete=models.CASCADE)
+#       PARENT_CHOICES = (
+#         ('MOTHER','MOTHER'),
+#         ('MOTHER','FATHER')
+#       )
+#       relation_type=models.CharField(max_length=30,choices=PARENT_CHOICES)
 
 
 
-class family_info(models.Model):
+class family_info_father(models.Model):
     # email=models.ForeignKey(User,on_delete=models.CASCADE)
     user =models.ForeignKey(User,on_delete=models.CASCADE)
-    femail=models.CharField(max_length=50)
-    name=models.CharField(max_length=50)
-    age=models.IntegerField()
-    contact_num=models.CharField(max_length=30)
-    qualification=models.CharField(max_length=30)
-    occupation=models.CharField(max_length=30)
-    relation_type=models.ForeignKey('family_relation',on_delete=models.CASCADE)
+    fname=models.CharField(max_length=50)
+    fage=models.IntegerField()
+    faddress=models.CharField(max_length=50)
+    fcontact_num=models.CharField(max_length=30)
+    femail=models.EmailField(max_length=50,default='xyz@gmail.com')
+    fqualification=models.CharField(max_length=30)
+    foccupation=models.CharField(max_length=30)
+    father_image =models.ImageField()
+    father_sign =models.ImageField()
+    PARENT_CHOICES = (
+         ('MOTHER','MOTHER'),
+        ('MOTHER','FATHER')
+    )
+    # prelation=models.CharField(max_length=30,choices =PARENT_CHOICES)
+
+class family_info_mother(models.Model):
+    # email=models.ForeignKey(User,on_delete=models.CASCADE)
+    user =models.ForeignKey(User,on_delete=models.CASCADE)
+    mname=models.CharField(max_length=50)
+    mage=models.IntegerField()
+    maddress=models.CharField(max_length=50)
+    mcontact_num=models.CharField(max_length=30)
+    memail=models.EmailField(max_length=50,default='xyz@gmail.com')
+    mqualification=models.CharField(max_length=30)
+    moccupation=models.CharField(max_length=30)
+    mother_image =models.ImageField()
+    mother_sign =models.ImageField()
 
 
 
@@ -93,6 +142,22 @@ class admission_details(models.Model):
     diploma_marks=models.DecimalField(max_length=50,max_digits=5,decimal_places=2)
     year_admission=models.IntegerField(default=0000)
     category_admission=models.CharField(max_length=50)
+
+
+class sibling_details(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    sib_name=models.CharField(max_length=50,default='NULL')
+    GENDER_CHOICES = (
+        ('MALE','MALE'),
+        ('FEMALE','FEMALE')
+        )
+    sib_gender = models.CharField(max_length=50,choices=GENDER_CHOICES)
+    sib_age=models.CharField(max_length=50)
+    sib_contact_num=models.CharField(max_length=30)
+    sib_qualification=models.CharField(max_length=30)
+    sib_occupation=models.CharField(max_length=30)
+
+
 
     
 
