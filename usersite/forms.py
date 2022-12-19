@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from . models import admission_details,personal_details,current_semester,family_info_father,family_info_mother,sibling_details
+from . models import admission_details,personal_details,current_semester,family_info_father,family_info_mother,sibling_details, roll_no
 from django.contrib.auth.models import User
 
 class admissionForm(ModelForm):
@@ -40,6 +40,11 @@ class extraDetailsForm(ModelForm):
     class Meta:
         model = current_semester
         fields = ['current_year','current_sem']                 
+
+class rollNoForm(ModelForm):
+    class Meta:
+        model = roll_no
+        fields = ['roll_no']                 
 
 
 

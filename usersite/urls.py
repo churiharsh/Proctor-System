@@ -7,9 +7,9 @@ from django.conf import settings
 from django.conf.urls.static import static
 urlpatterns = [
     # path('',views.home_view),
-    path('',views.adm_details),
-    path('page1/',views.stud_personal_details),
-    path('page2/',views.academicDetails),
+    path('admission',views.adm_details, name='admission'),
+    path('stud_personal_details',views.stud_personal_details, name="stud_personal_details"),
+    path('academicDetails',views.academicDetails, name="academicDetails"),
 ]
 
 if settings.DEBUG:

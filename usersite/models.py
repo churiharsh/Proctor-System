@@ -57,9 +57,11 @@ class current_semester(models.Model):
     current_sem=models.CharField(max_length=50,choices=CURRENT_SEM_CHOICES)
 
 
-# class roll_numbers(models.Model):
-#     user=models.ForeignKey(User,on_delete=models.CASCADE)
-#     current_sem=models.ForeignKey('current_semester',on_delete=models.CASCADE)
+class roll_no(models.Model):
+     user=models.ForeignKey(User,on_delete=models.CASCADE)
+     roll_no = models.IntegerField()
+    
+     sem=models.CharField(max_length=30)
 
 
 

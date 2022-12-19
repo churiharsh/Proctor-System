@@ -123,14 +123,15 @@
                     </tr>
                     <tr>
                         <td>Roll No.</td>
-                        <td><input id="rollno1" type="number" placeholder="SEM 1" name="rollsem1" value="{{admission1.rollsem1}}" onkeypress='validate(event)' ></td>
-                        <td><input id="rollno2" type="number" placeholder="SEM 2" name="rollsem2" value="{{admission1.rollsem2}}" onkeypress='validate(event)'></td>
-                        <td><input id="rollno3" type="number" placeholder="SEM 3" name="rollsem3" value="{{admission1.rollsem3}}" onkeypress='validate(event)'></td>
-                        <td><input id="rollno4" type="number" placeholder="SEM 4" name="rollsem4" value="{{admission1.rollsem4}}" onkeypress='validate(event)'></td>
-                        <td><input id="rollno5" type="number" placeholder="SEM 5" name="rollsem5" value="{{admission1.rollsem5}}" onkeypress='validate(event)'></td>
-                        <td><input id="rollno6" type="number" placeholder="SEM 6" name="rollsem6" value="{{admission1.rollsem6}}" onkeypress='validate(event)'></td>
-                        <td><input id="rollno7" type="number" placeholder="SEM 7" name="rollsem7" value="{{admission1.rollsem7}}" onkeypress='validate(event)'></td>
-                        <td><input id="rollno8" type="number" placeholder="SEM 8" name="rollsem8" value="{{admission1.rollsem8}}" onkeypress='validate(event)'></td>
+                        <td>{{form3.roll_no}}</td>
+                        <td>{{form3.roll_no}}</td>
+                        <td>{{form3.roll_no}}</td>
+                        <td>{{form3.roll_no}}</td>
+                        <td>{{form3.roll_no}}</td>
+                        <td>{{form3.roll_no}}</td>
+                        <td>{{form3.roll_no}}</td>
+                        <td>{{form3.roll_no}}</td>
+                        
                     </tr>
     
                     
@@ -204,7 +205,7 @@
     
         <div class="container" id="bottombtns">
            <!--  <a href="personalinfo.jsp"> -->
-        <a >
+        <a href="{%url 'stud_personal_details'%}">
                 <input class="btn btn-primary submit-btn" id="next"type="submit" value="Next" style="float: right;"  min="0" max="500000000000">  
             </a>
             <a href="">

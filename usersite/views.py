@@ -8,8 +8,8 @@ from django.shortcuts import redirect
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User,auth
-from .forms import admissionForm,personalDetailsForm,extraDetailsForm,siblingDetailsForm,familyFormFather,familyFormMother
-from . models import admission_details,personal_details,current_semester,sibling_details,family_info_father,family_info_mother
+from .forms import admissionForm,personalDetailsForm,extraDetailsForm,siblingDetailsForm,familyFormFather,familyFormMother, rollNoForm
+from . models import admission_details,personal_details,current_semester,sibling_details,family_info_father,family_info_mother, roll_no
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from logreg.views import registration
@@ -38,40 +38,48 @@ def adm_details(request):
         if request.user.is_authenticated:
            adm_details=admission_details.objects.filter(user=request.user).first()
            sem_details=current_semester.objects.filter(user=request.user).first()
+           roll_details=roll_no.objects.filter(user=request.user).first()
         #    adm_details=admission_details.objects.get(user=request.user)
           #  print(adm_details.year_admission)
            form = admissionForm(request.POST,instance=adm_details)
            form2 = extraDetailsForm(request.POST,instance=sem_details)
+           form3 = rollNoForm(request.POST, instance=roll_details)
            for field in form:
                print(field.value())
 
            if form.is_valid() and form2.is_valid():
             obj=form.save(commit=False)
             obj2=form2.save(commit=False)
+            obj3=form3.save(commit=False)
             obj.user = User.objects.get(pk=request.user.id)
             obj2.user = User.objects.get(pk=request.user.id)
+            obj3.user = User.objects.get(pk=request.user.id)
             obj.save()
             obj2.save()
-            return redirect('page2/')
+            obj3.save()
+            return redirect('stud_personal_details')
   
     else:
         adm_details=admission_details.objects.filter(user=request.user).first()
         sem_details=current_semester.objects.filter(user=request.user).first()
+        roll_details=roll_no.objects.filter(user=request.user).first()
         if not adm_details:
               form = admissionForm()
               form2 = extraDetailsForm()
+              form3 = rollNoForm()
 
         # adm_details=admission_details.objects.filter(user=request.user.id)
         else:
           form = admissionForm(instance=adm_details)
           form2 = extraDetailsForm(instance=sem_details)
+          form3 = rollNoForm(instance=roll_details)
 
           print("Hello else")
-          return render(request,'admission.html',{'form':form,'form2':form2})
+          return render(request,'admission.html',{'form':form,'form2':form2, 'form3':form3})
 
 
     print("Hello")
-    return render(request,'admission.html',{'form':form,'form2':form2})
+    return render(request,'admission.html',{'form':form,'form2':form2, 'form3':form3})
 
 
 def stud_personal_details(request):
@@ -105,7 +113,7 @@ def stud_personal_details(request):
             obj2.save()
             obj3.save()
             obj4.save()
-            return redirect('page2/')
+            return redirect('academicDetails')
   
     else:
         psnl_details = personal_details.objects.filter(user=request.user).first()
@@ -116,7 +124,7 @@ def stud_personal_details(request):
 
         
        
-        if not psnl_details and family_details and family_details2 and siblingobj:
+        if not psnl_details :   # and family_details and family_details2 and siblingobj
             form = personalDetailsForm()
             formFather = familyFormFather()
             formMother = familyFormMother()
