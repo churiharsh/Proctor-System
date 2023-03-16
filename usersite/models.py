@@ -70,13 +70,13 @@ class current_semester(models.Model):
 class semester_sub_ia(models.Model):
     # email=models.ForeignKey(User,on_delete=models.CASCADE)
     user=models.ForeignKey(User,on_delete=models.CASCADE)
-    current_semester=models.ForeignKey('current_semester',on_delete=models.CASCADE)
     sub_1=models.CharField(max_length=30)
     sub_2=models.CharField(max_length=30)
     sub_3=models.CharField(max_length=30)
     sub_4=models.CharField(max_length=30)
     sub_5=models.CharField(max_length=30)
     sub_6=models.CharField(max_length=30)
+    semester = models.CharField(max_length=30, default = None)
 
 
 class attendance(models.Model):

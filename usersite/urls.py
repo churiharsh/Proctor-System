@@ -9,7 +9,8 @@ urlpatterns = [
     # path('',views.home_view),
     path('',views.adm_details),
     path('page1/',views.stud_personal_details),
-    path('page2/',views.academicDetails),
+    path('page1/page2/',views.academicDetails),
+    path('page1/page2/submit_academic/',views.academicDetails),
 ]
 
 if settings.DEBUG:

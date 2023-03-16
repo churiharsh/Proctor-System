@@ -9,7 +9,7 @@ from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User,auth
 from .forms import admissionForm,personalDetailsForm,extraDetailsForm,siblingDetailsForm,familyFormFather,familyFormMother
-from . models import admission_details,personal_details,current_semester,sibling_details,family_info_father,family_info_mother
+from . models import admission_details,personal_details,current_semester,sibling_details,family_info_father,family_info_mother,semester_sub_ia
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from logreg.views import registration
@@ -52,7 +52,7 @@ def adm_details(request):
             obj2.user = User.objects.get(pk=request.user.id)
             obj.save()
             obj2.save()
-            return redirect('page2/')
+            return redirect('page1/')
   
     else:
         adm_details=admission_details.objects.filter(user=request.user).first()
@@ -146,6 +146,26 @@ def stud_personal_details(request):
       
 
 def academicDetails(request):
+    if request.method == 'POST':
+        marks1 = request.POST.getlist('marks')
+        marks2 = request.POST.getlist('marks2')
+        marks3 = request.POST.getlist('marks3')
+        newList = [marks,marks2,marks3]
+        sem = request.POST['sem1']
+        print(sem)
+        print(type(marks))
+        for marks in newList:
+                for i in marks:
+                      sub_1,sub_2,sub_3,sub_4,sub_5,sub_6=i
+                      sem_marks = semester_sub_ia(semester=sem,sub_1=sub_1,sub_2=sub_2,sub_3=sub_3,sub_4=sub_4,sub_5=sub_5,sub_6=sub_6) 
+                      sem_marks.save()
+        # for i in marks:
+        #      print(type(i))
+                # print("sub_"+str(x)+ "=" +str(i))
+            
+
+
+
     return render(request,'academic.html')
 
 

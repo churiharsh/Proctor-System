@@ -93,16 +93,16 @@ def logout_view(request):
     logout(request)
     return render(request,'logout.html')   
        
-    #   form=NewUserForm(request.POST)
-    # if form.is_valid():
-    #         user=form.save()
-    #         login(request,user)
-    #         message.success(request,f"New Account Created: {user.username}")
-    #         return redirect("main:home")
-    #         message.error(request,"Account Creation Failed")
-    # form=NewUserForm()
-    # return render(request=request,template_name="registration.html",context={"form":form})      
-    # return render(request,'registration.html')
+      form=NewUserForm(request.POST)
+    if form.is_valid():
+            user=form.save()
+            login(request,user)
+            message.success(request,f"New Account Created: {user.username}")
+            return redirect("main:home")
+            message.error(request,"Account Creation Failed")
+    form=NewUserForm()
+    return render(request=request,template_name="registration.html",context={"form":form})      
+    return render(request,'registration.html') 
 
     
 
